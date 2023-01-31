@@ -1,0 +1,1 @@
+{"pageProps":{"post":"---\r\nlayout:     post\r\ntitle:      \"Web开发基础\"\r\nintro:      \"\"\r\ndate:       2020-2-18 09:00:00\r\nauthor:     \"Makinohara\"\r\ncatalog: true\r\ntags:\r\n    - 工程开发\r\n---\r\n\r\n\r\n\r\n# 基础知识\r\n\r\n## 目录与相对目录\r\n\r\n```\r\n根目录： /\r\n上级目录： ../\r\n根目录下的路径：/img/......\r\n当前目录下的下级目录：img/......\r\n```\r\n\r\n"},"__N_SSG":true}

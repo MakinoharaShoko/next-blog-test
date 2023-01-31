@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="preload" href="/_next/static/css/876d048b5dab7c28.css" as="style"/><link rel="stylesheet" href="/_next/static/css/876d048b5dab7c28.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/_next/static/chunks/webpack-59c5c889f52620d6.js" defer=""></script><script src="/_next/static/chunks/framework-2c79e2a64abdb08b.js" defer=""></script><script src="/_next/static/chunks/main-f11614d8aa7ee555.js" defer=""></script><script src="/_next/static/chunks/pages/_app-bf55c49910772dbb.js" defer=""></script><script src="/_next/static/chunks/9f96d65d-c9e0543547ce45e9.js" defer=""></script><script src="/_next/static/chunks/557-10798b428373902a.js" defer=""></script><script src="/_next/static/chunks/pages/posts/%5Bid%5D-a468c6c0f66f2931.js" defer=""></script><script src="/_next/static/ZF3YO57AemfjKbXhzWO3Q/_buildManifest.js" defer=""></script><script src="/_next/static/ZF3YO57AemfjKbXhzWO3Q/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div><p>现在开始准备计算机视觉的入门内容，我们计划通过网络上的教程来基本学习 OpenCV 的使用，接下来再进行理论课（计算机视觉）的学习，然后学习深度学习（机器学习）、计算机视觉与深度学习的融合。</p>
+<h1>OpenCV篇</h1>
+<h2>基本操作</h2>
+<p>引入图片：</p>
+<pre><code class="language-python">import cv2
+import numpy as np
+from matplotlib import pyplot as plt
+
+img = cv2.imread(&#x27;watch.png&#x27;,cv2.IMREAD_GRAYSCALE)#该方式为灰度引入，而颜色引入为IMREAD_COLOR，保留alpha通道则为IMREAD_UNCHANGED，分别对应着数字0（灰度）,1（颜色）,-1（不变）
+cv2.imshow(&#x27;image&#x27;,img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+</code></pre>
+<p>引入摄像头作为视频源：</p>
+<pre><code class="language-python">import numpy as np
+import cv2
+
+cap = cv2.VideoCapture(2)
+
+while (True):
+    ret, frame = cap.read()  # ret代表是否有返回值，frame则是得到的帧
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 转换为灰度，没有转换前的就是frame
+
+    #（可选）录制到视频并输出:
+    #fourcc = cv2.VideoWriter_fourcc(*&#x27;XVID&#x27;)
+    #out = cv2.VideoWriter(&#x27;output.avi&#x27;, fourcc, 20.0, (640, 480))
+
+    # 分别显示灰度输出和彩色输出：
+    cv2.imshow(&#x27;gray&#x27;, gray)
+    cv2.imshow(&#x27;frame&#x27;, frame)
+
+    #（可选）输出视频文件：
+    #out.write(frame)
+
+    if cv2.waitKey(1) &amp; 0xFF == ord(&#x27;q&#x27;):
+        break
+
+cap.release()
+cv2.destroyAllWindows()
+</code></pre>
+<h3>绘制操作</h3>
+<pre><code class="language-python">import numpy as np
+import cv2
+
+img = cv2.imread(&#x27;D1_res/watch.png&#x27;,cv2.IMREAD_COLOR)
+
+
+#基本的绘制操作
+cv2.line(img,(0,0),(150,150),(255,255,255),2)#线
+cv2.rectangle(img,(50,50),(150,150),(0,0,255),2)#矩形
+cv2.circle(img,(100,100), 100, (0,255,0), 2)#圆
+
+
+#自由绘制
+pts = np.array([[0,0],[50,50],[100,150],[200,150]], np.int32)#坐标集
+#pts = pts.reshape((-1,1,2))  可能会用到的操作
+cv2.polylines(img, [pts], True, (0,255,255), 3)#绘制对象，坐标集，是否首尾相连，颜色，粗细
+
+
+
+font = cv2.FONT_HERSHEY_SIMPLEX
+cv2.putText(img,&#x27;TestText&#x27;,(50,50), font, 1, (200,255,155), 2, cv2.LINE_AA)
+
+
+
+cv2.imshow(&#x27;image&#x27;,img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+</code></pre></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":"---\r\nlayout:     post\r\ntitle:      \"计算机视觉——入门\"\r\nintro:   \"\"\r\ndate:       2021-6-16 12:00:01\r\nauthor:     \"Makinohara\"\r\ncatalog: true\r\ntags:\r\n    - 科研应用\r\n    \r\n---\r\n\r\n现在开始准备计算机视觉的入门内容，我们计划通过网络上的教程来基本学习 OpenCV 的使用，接下来再进行理论课（计算机视觉）的学习，然后学习深度学习（机器学习）、计算机视觉与深度学习的融合。\r\n\r\n# OpenCV篇\r\n\r\n## 基本操作\r\n\r\n引入图片：\r\n\r\n```python\r\nimport cv2\r\nimport numpy as np\r\nfrom matplotlib import pyplot as plt\r\n\r\nimg = cv2.imread('watch.png',cv2.IMREAD_GRAYSCALE)#该方式为灰度引入，而颜色引入为IMREAD_COLOR，保留alpha通道则为IMREAD_UNCHANGED，分别对应着数字0（灰度）,1（颜色）,-1（不变）\r\ncv2.imshow('image',img)\r\ncv2.waitKey(0)\r\ncv2.destroyAllWindows()\r\n```\r\n\r\n引入摄像头作为视频源：\r\n\r\n```python\r\nimport numpy as np\r\nimport cv2\r\n\r\ncap = cv2.VideoCapture(2)\r\n\r\nwhile (True):\r\n    ret, frame = cap.read()  # ret代表是否有返回值，frame则是得到的帧\r\n    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)  # 转换为灰度，没有转换前的就是frame\r\n\r\n    #（可选）录制到视频并输出:\r\n    #fourcc = cv2.VideoWriter_fourcc(*'XVID')\r\n    #out = cv2.VideoWriter('output.avi', fourcc, 20.0, (640, 480))\r\n\r\n    # 分别显示灰度输出和彩色输出：\r\n    cv2.imshow('gray', gray)\r\n    cv2.imshow('frame', frame)\r\n\r\n    #（可选）输出视频文件：\r\n    #out.write(frame)\r\n\r\n    if cv2.waitKey(1) \u0026 0xFF == ord('q'):\r\n        break\r\n\r\ncap.release()\r\ncv2.destroyAllWindows()\r\n```\r\n\r\n### 绘制操作\r\n\r\n```python\r\nimport numpy as np\r\nimport cv2\r\n\r\nimg = cv2.imread('D1_res/watch.png',cv2.IMREAD_COLOR)\r\n\r\n\r\n#基本的绘制操作\r\ncv2.line(img,(0,0),(150,150),(255,255,255),2)#线\r\ncv2.rectangle(img,(50,50),(150,150),(0,0,255),2)#矩形\r\ncv2.circle(img,(100,100), 100, (0,255,0), 2)#圆\r\n\r\n\r\n#自由绘制\r\npts = np.array([[0,0],[50,50],[100,150],[200,150]], np.int32)#坐标集\r\n#pts = pts.reshape((-1,1,2))  可能会用到的操作\r\ncv2.polylines(img, [pts], True, (0,255,255), 3)#绘制对象，坐标集，是否首尾相连，颜色，粗细\r\n\r\n\r\n\r\nfont = cv2.FONT_HERSHEY_SIMPLEX\r\ncv2.putText(img,'TestText',(50,50), font, 1, (200,255,155), 2, cv2.LINE_AA)\r\n\r\n\r\n\r\ncv2.imshow('image',img)\r\ncv2.waitKey(0)\r\ncv2.destroyAllWindows()\r\n```\r\n\r\n"},"__N_SSG":true},"page":"/posts/[id]","query":{"id":"2021-6-16-CV.markdown"},"buildId":"ZF3YO57AemfjKbXhzWO3Q","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>
